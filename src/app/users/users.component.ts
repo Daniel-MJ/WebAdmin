@@ -5,10 +5,10 @@ import { ActividadComponent } from '../activities/activities.component';
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css',
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.css',
 })
-export class SearchComponent {
+export class UsersComponent {
   selectedCategoria: string = "";
   title = 'Busqueda Por Parametros.';
   fechaInicial: string = "";

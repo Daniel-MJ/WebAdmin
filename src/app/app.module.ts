@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
+import { UsersComponent } from './users/users.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ActividadComponent } from './activities/activities.component';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   declarations: [
     AppComponent,
-    SearchComponent,
+    UsersComponent,
     ActividadComponent,
   ],
   providers: [
