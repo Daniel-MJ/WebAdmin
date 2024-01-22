@@ -1,6 +1,6 @@
 <h1>{{ title }}</h1>
 
-<div class="search-section">
+<div class="users-section">
   <label for="fechaInicial">Fecha Inicial:</label>
   <input type="date" id="fechaInicial" [(ngModel)]="fechaInicial">
 
@@ -10,13 +10,13 @@
   <button (click)="buscarActividadesPorFecha()">Buscar Actividades</button>
 </div>
 
-<div class="search-section">
+<div class="users-section">
   <label for="lugar">Lugar:</label>
   <input type="text" id="lugar" [(ngModel)]="lugar">
   <button (click)="buscarActividadesPorLugar()">Buscar Actividades por Lugar</button>
 </div>
 
-<div class="search-section">
+<div class="users-section">
     <label for="categoria">Categoría:</label>
     <select id="categoria" [(ngModel)]="selectedCategoria">
       <option value="formacion">Formación</option>

@@ -4,7 +4,7 @@ import { Insputssearch } from '../insputssearch';
 import { ActividadComponent } from '../activities/activities.component';
 
 @Component({
-  selector: 'app-search',
+  selector: 'users-search',
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
