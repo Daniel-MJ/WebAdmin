@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Insputssearch } from './insputssearch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  baseSearchUrl = 'https://localhost:8183/ApiServerWeb/searchActivities';
+  baseSearchUrl = 'https://localhost:8183/ApiServerWeb';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -27,15 +28,37 @@ export class ApiService {
     return this.httpClient.get<Insputssearch[]>(url,{ headers, withCredentials: true });
   }
 
-  getActividadesPorLugar(lugar: String): Observable<Insputssearch[]> {
-    const url = `${this.baseSearchUrl}?METODO=forPlace&lugar=${lugar}`;
+  postUser(user: String, pass: String): Observable<string> {
+      // Crear un objeto JSON con los nombres de usuario y contraseña
+    const requestBody = {
+      username: user,
+      password: pass
+    };
+    // Convertir el objeto JSON a una cadena
+    const requestBodyString = JSON.stringify(requestBody);
+
+    const url = `${this.baseSearchUrl}/createUser`;
     const headers  = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
     });
-      return this.httpClient.get<Insputssearch[]>(url,{ headers, withCredentials: true });
-    
+    return this.httpClient.post(url, requestBodyString, { headers, withCredentials: true, responseType: 'arraybuffer' })
+    .pipe(
+      map(response => new TextDecoder('utf-8').decode(response))
+    );
   }
+
+  deleteUser(user: String): Observable<any> {
+
+    const url = `${this.baseSearchUrl}/createUser?user=${user}`;
+    const headers  = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
+    });
+      return this.httpClient.delete(url,{ headers, withCredentials: true });
+  
+  }
+  
   
   getActividadesPorCategoria(categoria: String): Observable<Insputssearch[]> {
     const url = `${this.baseSearchUrl}?METODO=forCategory&categoria=${categoria}`;

@@ -9,61 +9,41 @@ import { ActividadComponent } from '../activities/activities.component';
   styleUrl: './users.component.css',
 })
 export class UsersComponent {
-  selectedCategoria: string = "";
-  title = 'Busqueda Por Parametros.';
-  fechaInicial: string = "";
-  fechaFinal: string = "";
-  actividades: Insputssearch[] = [];
-  lugar: string = "";
-  categoria: string = ""
+  title = 'Gestion de Usuarios.';
+ // actividades: Insputssearch[] = [];
+  user: string = "";
+  pass: string = "";
+  deleteUser: string ="";
+  mensajeRespuesta: string = '';
 
   constructor(private apiService: ApiService) {}
 
-  buscarActividadesPorFecha() {
-    const fechaInicio = this.fechaInicial // Reemplaza esto con la fecha recogida
-    const fechaFinal = this.fechaFinal; // Reemplaza esto con la fecha recogida
 
-
-    this.apiService.getActividadesPorFecha(fechaInicio, fechaFinal)
-      .subscribe(
-        (actividades: Insputssearch[]) => {
-          // Manejar las actividades devueltas
-          this.actividades = actividades;
-        },
-        (error: any) => {
-          // Manejar el error si es necesario
-          console.error('Error al obtener actividades:', error);
-        }
-      );
-
-  }
-
-  buscarActividadesPorLugar() {
-    const lugar = this.lugar // Reemplaza esto con el lugar recogido
-
-    this.apiService.getActividadesPorLugar(lugar)
-      .subscribe((actividades: Insputssearch[]) => {
+  CreateUser() {
+    const user = this.user; // Reemplaza esto con el usuario recogido
+    const pass = this.pass;
+    this.apiService.postUser(user,pass)
+      .subscribe((respuesta: string) => {
         // Manejar las actividades devueltas
-        this.actividades = actividades;
+        this.mensajeRespuesta = respuesta; ;
       },
       (error: any) => {
         // Manejar el error si es necesario
-        console.error('Error al obtener actividades:', error);
+        console.error('Error al crear usuario:', error);
       }
     );
   }
+  DeleteUser() {
+    const  deleteUser = this. deleteUser; // Reemplaza esto con el usuario recogido
 
-  buscarActividadesPorCategoria() {
-    const categoria = this.selectedCategoria // Reemplaza esto con la categoria recogida
-
-    this.apiService.getActividadesPorCategoria(categoria)
-      .subscribe((actividades: Insputssearch[]) => {
+    this.apiService.deleteUser(deleteUser)
+      .subscribe((respuesta: any) => {
         // Manejar las actividades devueltas
-        this.actividades = actividades;
+        this.mensajeRespuesta = respuesta.message; ;
       },
       (error: any) => {
         // Manejar el error si es necesario
-        console.error('Error al obtener actividades:',error);
+        console.error('Error al eliminar usuario:', error);
       }
     );
   }

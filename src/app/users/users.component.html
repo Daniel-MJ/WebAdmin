@@ -1,38 +1,23 @@
 <h1>{{ title }}</h1>
 
 <div class="users-section">
-  <label for="fechaInicial">Fecha Inicial:</label>
-  <input type="date" id="fechaInicial" [(ngModel)]="fechaInicial">
-
-  <label for="fechaFinal">Fecha Final:</label>
-  <input type="date" id="fechaFinal" [(ngModel)]="fechaFinal">
-
-  <button (click)="buscarActividadesPorFecha()">Buscar Actividades</button>
+  <h2>Crear Usuario:</h2>
+  <label for="CreateUser">Usuario:</label>
+  <input type="text" id="CreateUser" [(ngModel)]="user">
+  <label for="createPass">Contraseña:</label>
+  <input type="text" id="createPass" [(ngModel)]="pass">
+  <button (click)="CreateUser()">Crear Usuario</button>
 </div>
 
 <div class="users-section">
-  <label for="lugar">Lugar:</label>
-  <input type="text" id="lugar" [(ngModel)]="lugar">
-  <button (click)="buscarActividadesPorLugar()">Buscar Actividades por Lugar</button>
+  <h2>Eliminar Usuario:</h2>
+  <label for="deleteUser">Usuario:</label>
+  <input type="text" id="deleteUser" [(ngModel)]="deleteUser">
+  <button (click)="DeleteUser()">Eliminar Usuario</button>
 </div>
 
-<div class="users-section">
-    <label for="categoria">Categoría:</label>
-    <select id="categoria" [(ngModel)]="selectedCategoria">
-      <option value="formacion">Formación</option>
-      <option value="academica">Académica</option>
-      <option value="laboral">Laboral</option>
-      <option value="divulgativa">Divulgativa</option>
-    </select>
-  
-    <button (click)="buscarActividadesPorCategoria()">Buscar Actividades</button>
-  </div>
 
-  <div *ngIf="actividades.length > 0">
-    <h2>Actividades Encontradas:</h2>
-    <div class="actividades-grid">
-      <div *ngFor="let actividad of actividades" class="actividad-item">
-        <app-activities [actividad]="actividad"></app-activities>
-      </div>
-    </div>
-  </div>
+<div *ngIf="mensajeRespuesta">
+  <h2>Respuesta del Servidor:</h2>
+  <p>{{ mensajeRespuesta }}</p>
+</div>
