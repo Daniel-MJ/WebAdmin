@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { manageActivitiesComponent } from './manageActivities/manageActivities.component';
 import { ActividadComponent } from './activities/activities.component';
 
 

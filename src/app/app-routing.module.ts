@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { manageActivitiesComponent } from './manageActivities/manageActivities.component';
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
-  { path: 'calendar', component: CalendarComponent }
+  { path: 'manageActivities', component: manageActivitiesComponent }
 ];
 
 @NgModule({
