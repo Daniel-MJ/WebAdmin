@@ -48,14 +48,17 @@ export class ApiService {
     );
   }
 
-  deleteUser(user: String): Observable<any> {
+  deleteUser(user: String): Observable<string> {
 
     const url = `${this.baseSearchUrl}/createUser?user=${user}`;
     const headers  = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
     });
-      return this.httpClient.delete(url,{ headers, withCredentials: true });
+    return this.httpClient.delete(url, { headers, withCredentials: true, responseType: 'arraybuffer' })
+    .pipe(
+      map(response => new TextDecoder('utf-8').decode(response))
+    );
   
   }
   

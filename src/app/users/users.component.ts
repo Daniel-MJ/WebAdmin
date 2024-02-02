@@ -25,7 +25,7 @@ export class UsersComponent {
     this.apiService.postUser(user,pass)
       .subscribe((respuesta: string) => {
         // Manejar las actividades devueltas
-        this.mensajeRespuesta = respuesta; ;
+        this.mensajeRespuesta = respuesta;
       },
       (error: any) => {
         // Manejar el error si es necesario
@@ -37,9 +37,9 @@ export class UsersComponent {
     const  deleteUser = this. deleteUser; // Reemplaza esto con el usuario recogido
 
     this.apiService.deleteUser(deleteUser)
-      .subscribe((respuesta: any) => {
+      .subscribe((respuesta: string) => {
         // Manejar las actividades devueltas
-        this.mensajeRespuesta = respuesta.message; ;
+        this.mensajeRespuesta = respuesta;
       },
       (error: any) => {
         // Manejar el error si es necesario
