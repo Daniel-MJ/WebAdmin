@@ -1,0 +1,85 @@
+.activity-item {
+    margin-bottom: 8px; /* Ajusta el espacio entre las filas según tus preferencias */
+  }
+
+button {
+    background-color: #e25a00;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: rgb(255, 255, 254);
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+button:hover {
+    background-color: rgb(223, 163, 12);
+    color: white;
+}
+button:disabled {
+    background-color: #eee;
+    color: #ffffff;
+    cursor: auto;
+}
+
+.small-button {
+    background-color: #e25a00;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: rgb(255, 255, 254);
+    font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+    padding: 0.5rem 1rem; /* Menos espacio de relleno vertical */
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+body {
+    margin: 10em;
+}
+
+body, input[type="text"]{
+    color: #000000;
+    font-family: Cambria, Georgia, serif;
+}
+
+/* Estilos para los inputs y labels dentro de .form-group */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group textarea {
+    width: calc(100% - 2rem); /* Ancho total menos el padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    height: 150px; /* Ajusta la altura del textarea según tus necesidades */
+}
+
+/* Estilos para los inputs y labels cuando están en focus */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #e25a00; /* Cambia el color del borde cuando está en focus */
+}
+
+/* Estilos para los inputs y labels cuando están en hover */
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: #e25a00; /* Cambia el color del borde cuando se hace hover */
+}

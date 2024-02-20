@@ -1,90 +1,91 @@
 <h1>{{title}}</h1>
 
 <div>
-    
+  <button (click)="toggleInputs()">Crear Actividades</button>
     <!-- Formulario para crear una actividad -->
-    <form (ngSubmit)="CreateActivities()">
+    <form *ngIf="showInputs" (ngSubmit)="CreateActivities()">
       <!-- Título -->
-      <div>
+      <div class="form-group">
         <label for="titulo">Título:</label>
         <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required>
       </div>
   
       <!-- Tipo -->
-      <div>
+      <div class="form-group">
         <label for="tipo">Tipo:</label>
         <input type="text" id="tipo" name="tipo" [(ngModel)]="tipo" required>
       </div>
   
       <!-- Fecha de inicio -->
-      <div>
+      <div class="form-group">
         <label for="fechaInicio">Fecha de inicio:</label>
         <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio" required>
         <input type="time" id="horaInicio" name="horaInicio" [(ngModel)]="horaInicio" required>
       </div>
   
       <!-- Fecha de finalización -->
-      <div>
+      <div class="form-group">
         <label for="fechaFinal">Fecha de finalización:</label>
         <input type="date" id="fechaFinal" name="fechaFinal" [(ngModel)]="fechaFinal" required>
         <input type="time" id="horaFinal" name="horaFinal" [(ngModel)]="horaFinal" required>
       </div>
   
       <!-- Ponente (puede haber varios) -->
-      <div>
+      <div class="form-group">
         <label for="ponente">Ponente(s):</label>
         <input type="text" id="ponente" name="ponente" [(ngModel)]="ponente" required>
       </div>
   
       <!-- Organizador (puede haber varios) -->
-      <div>
+      <div class="form-group">
         <label for="organizador">Organizador(es):</label>
         <input type="text" id="organizador" name="organizador" [(ngModel)]="organizador" required>
       </div>
   
       <!-- Lugar -->
-      <div>
+      <div class="form-group">
         <label for="lugar">Lugar:</label>
         <input type="text" id="lugar" name="lugar" [(ngModel)]="lugar" required>
       </div>
   
       <!-- Límite de asistentes -->
-      <div>
+      <div class="form-group">
         <label for="limiteAsistentes">Límite de asistentes:</label>
         <input type="number" id="limiteAsistentes" name="limiteAsistentes" [(ngModel)]="limiteAsistentes" required>
       </div>
   
       <!-- Enlace de información -->
-      <div>
+      <div class="form-group">
         <label for="enlaceInformacion">Enlace de información:</label>
         <input type="url" id="enlaceInformacion" name="enlaceInformacion" [(ngModel)]="enlaceInformacion" required>
       </div>
   
       <!-- Enlace de inscripción -->
-      <div>
+      <div class="form-group">
         <label for="enlaceInscripcion">Enlace de inscripción:</label>
         <input type="url" id="enlaceInscripcion" name="enlaceInscripcion" [(ngModel)]="enlaceInscripcion" required>
       </div>
   
       <!-- Descripción -->
-      <div>
+      <div class="form-group">
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" name="descripcion" [(ngModel)]="descripcion" required></textarea>
       </div>
   
       <!-- Categoría (puede haber varias) -->
-      <div>
+      <div class="form-group">
         <label for="categoria">Categoría(s):</label>
         <input type="text" id="categoria" name="categoria" [(ngModel)]="categoria" required>
       </div>
   
       <!-- Botón para enviar el formulario -->
-      <button type="submit">Crear Actividad</button>
+      <button type="submit" class="small-button">Crear Actividad</button>
     </form>
     
-    <!-- Mostrar mensaje de respuesta del servidor -->
-    <div *ngIf="mensajeRespuesta">
-      <h3>Respuesta del Servidor:</h3>
-      <p>{{ mensajeRespuesta }}</p>
-    </div>
+  </div>
+
+  <!-- Mostrar mensaje de respuesta del servidor -->
+  <div *ngIf="mensajeRespuesta">
+    <h3>Respuesta del Servidor:</h3>
+    <p>{{ mensajeRespuesta }}</p>
   </div>

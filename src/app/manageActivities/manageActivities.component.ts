@@ -25,7 +25,13 @@ export class manageActivitiesComponent {
   categoria: String[] = [];
   mensajeRespuesta: string = '';
 
+  showInputs: boolean = false;
+
   constructor(private apiService: ApiService) {}
+
+  toggleInputs() {
+    this.showInputs = !this.showInputs;
+  }
 
   CreateActivities() {
     const titulo = this.titulo; // Reemplaza esto con el usuario recogido
