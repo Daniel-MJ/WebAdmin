@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     UsersComponent,
     ActividadComponent,
+    manageActivitiesComponent,
   ],
   providers: [
     // no need to place any providers due to the `providedIn` flag...
