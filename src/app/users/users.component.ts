@@ -34,7 +34,7 @@ export class UsersComponent {
     );
   }
   DeleteUser() {
-    const  deleteUser = this. deleteUser; // Reemplaza esto con el usuario recogido
+    const deleteUser = this.deleteUser; // Reemplaza esto con el usuario recogido
 
     this.apiService.deleteUser(deleteUser)
       .subscribe((respuesta: string) => {
