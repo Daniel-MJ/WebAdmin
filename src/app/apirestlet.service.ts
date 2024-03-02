@@ -13,9 +13,14 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  async getAllActividades(): Promise<Insputssearch[]> {
-    const data = await fetch(this.baseSearchUrl);
-    return await data.json() ?? [];
+  getAllActividades(): Observable<Insputssearch[]> {
+    const url = `${this.baseSearchUrl}?METODO=All`;
+    const headers  = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
+    });
+
+    return this.httpClient.get<Insputssearch[]>(url,{ headers, withCredentials: true });
   }
 
   getActividadesPorFecha(fechaInicio: String, fechaFinal: String): Observable<Insputssearch[]> {

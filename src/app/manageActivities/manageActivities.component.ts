@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../apirestlet.service';
+import { Insputssearch } from '../insputssearch';
 
 @Component({
   selector: 'app-manageActivities',
@@ -25,6 +26,7 @@ export class manageActivitiesComponent {
   categoria: String[] = [];
   mensajeRespuesta: string = '';
   deleteActivity: string = "";
+  actividades: Insputssearch[] = [];
 
   showInputs: boolean = false;
   showInputs1: boolean = false;
@@ -113,6 +115,22 @@ export class manageActivitiesComponent {
         console.error('Error al eliminar usuario:', error);
       }
     );
+  }
+
+  buscarTodasActividades() {
+
+    this.apiService.getAllActividades()
+      .subscribe(
+        (actividades: Insputssearch[]) => {
+          // Manejar las actividades devueltas
+          this.actividades = actividades;
+        },
+        (error: any) => {
+          // Manejar el error si es necesario
+          console.error('Error al obtener actividades:', error);
+        }
+      );
+
   }
     
 }
