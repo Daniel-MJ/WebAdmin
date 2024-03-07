@@ -82,9 +82,9 @@
       <button type="submit" class="small-button">Crear Actividad</button>
     </form>
     
-  </div>
+</div>
 
-  <div>
+<div>
     <button (click)="toggleInputs1()">Modificar Actividades</button>
       <!-- Formulario para crear una actividad -->
       <form *ngIf="showInputs1" (ngSubmit)="ModifyActivities()">
@@ -166,8 +166,8 @@
         <button type="submit" class="small-button">Modificar</button>
       </form>
       
-    </div>
-    <div>
+</div>
+<div>
       <button (click)="toggleInputs2()">Eliminar Actividades</button>
         <!-- Formulario para crear una actividad -->
         <form *ngIf="showInputs2" (ngSubmit)="DeleteActivities()">
@@ -180,10 +180,68 @@
           <button type="submit" class="small-button">Borrar</button>
         </form>
         
-      </div>
+</div>
+
+<!-- Agrega un formulario para ingresar los filtros -->
+<form class="form-container">
+ <div class="input-group">
+  <input type="date" [(ngModel)]="filtroFechaInicio" name="filtroFechaInicio" value="Fecha de Inicio" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" placeholder="Fecha de Inicio">
+  <input type="date" [(ngModel)]="filtroFechaFinal" name="filtroFechaFinal" value="Fecha de Finalización" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" placeholder="Fecha de Finalización">
+ </div>
+ <div class="input-group">
+  <input type="text" [(ngModel)]="filtroLugar" name="filtroLugar" placeholder="Lugar">
+  <input type="text" [(ngModel)]="filtroPonente" name="filtroPonente" placeholder="Ponente">
+ </div>
+ <div class="input-group">
+  <input type="text" [(ngModel)]="filtroOrganizador" name="filtroOrganizador" placeholder="Organizador">
+  <input type="text" [(ngModel)]="filtroCategoria" name="filtroCategoria" placeholder="Categoria">
+</div>
+  <!-- Agrega más campos de filtro según sea necesario -->
+  <div class="button-container">
+    <button type="button" class="small-button" (click)="limpiarFiltros()">Limpiar Filtros</button>
+  </div>
+</form>
+
+  <!-- Tabla para mostrar las actividades -->
+<table *ngIf="actividades.length > 0" class="table-container">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Tipo</th>
+        <th>Fecha de Inicio</th>
+        <th>Fecha de Finalización</th>
+        <th>Ponente(s)</th>
+        <th>Organizador(es)</th>
+        <th>Lugar</th>
+        <th>Límite de Asistentes</th>
+        <th>Enlace de Información</th>
+        <th>Enlace de Inscripción</th>
+        <th>Categoría(s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let actividad of actividades.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize)">-->
+        <tr *ngFor="let actividad of actividades | filtroActividades:filtroFechaInicio:filtroFechaFinal:filtroLugar:filtroPonente:filtroOrganizador:filtroCategoria | slice:(paginator.pageIndex * paginator.pageSize):((paginator.pageIndex + 1) * paginator.pageSize)">
+        <td>{{ actividad.titulo }}</td>
+        <td>{{ actividad.tipo }}</td>
+        <td>{{ actividad.fechaInicio.$date }}</td>
+        <td>{{ actividad.fechaFinal.$date }}</td>
+        <td>{{ actividad.ponente.join(', ') }}</td>
+        <td>{{ actividad.organizador.join(', ') }}</td>
+        <td>{{ actividad.lugar }}</td>
+        <td>{{ actividad.limiteAsistentes }}</td>
+        <td>{{ actividad.enlaceInformacion }}</td>
+        <td>{{ actividad.enlaceInscripcion }}</td>
+        <td>{{ actividad.categoria.join(', ') }}</td>
+      </tr>
+    </tbody>
+</table>
+
+<!-- Paginador -->
+<mat-paginator [length]="actividades.length" [pageSize]="20" [pageSizeOptions]="[20, 50, 100]" (page)="onPageChange($event)"></mat-paginator>
 
   <!-- Mostrar mensaje de respuesta del servidor -->
-  <div *ngIf="mensajeRespuesta">
+<div *ngIf="mensajeRespuesta">
     <h3>Respuesta del Servidor:</h3>
     <p>{{ mensajeRespuesta }}</p>
-  </div>
+</div>

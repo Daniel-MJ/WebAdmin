@@ -14,7 +14,7 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
   getAllActividades(): Observable<Insputssearch[]> {
-    const url = `${this.baseSearchUrl}?METODO=All`;
+    const url = `${this.baseSearchUrl}/searchActivities?METODO=All`;
     const headers  = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),

@@ -10,7 +10,7 @@ export interface Insputssearch {
     ponente: string[];
     organizador: string[];
     lugar: string;
-    límiteAsistentes: number;
+    limiteAsistentes: number;
     enlaceInformacion: string;
     enlaceInscripcion: string;
     descripcion: string;
