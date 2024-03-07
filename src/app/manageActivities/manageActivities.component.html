@@ -88,82 +88,85 @@
     <button (click)="toggleInputs1()">Modificar Actividades</button>
       <!-- Formulario para crear una actividad -->
       <form *ngIf="showInputs1" (ngSubmit)="ModifyActivities()">
-        <!-- Título -->
-        <div class="form-group">
-          <label for="titulo">Título:</label>
-          <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required>
+        <div *ngIf="actividadSeleccionada">
+          <!-- Título -->
+          <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" [(ngModel)]="actividadSeleccionada.titulo" required>
+          </div>
+      
+          <!-- Tipo -->
+          <div class="form-group">
+            <label for="tipo">Tipo:</label>
+            <input type="text" id="tipo" name="tipo" [(ngModel)]="actividadSeleccionada.tipo" required>
+          </div>
+      
+          <!-- Fecha de inicio -->
+          <div class="form-group">
+            <label for="fechaInicio">Fecha de inicio:</label>
+            <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="actividadSeleccionada.fechaInicio" required>
+            <input type="time" id="horaInicio" name="horaInicio" [(ngModel)]="horaInicio" required>
+          </div>
+      
+          <!-- Fecha de finalización -->
+          <div class="form-group">
+            <label for="fechaFinal">Fecha de finalización:</label>
+            <input type="date" id="fechaFinal" name="fechaFinal" [(ngModel)]="actividadSeleccionada.fechaFinal" required>
+            <input type="time" id="horaFinal" name="horaFinal" [(ngModel)]="horaFinal" required>
+          </div>
+      
+          <!-- Ponente (puede haber varios) -->
+          <div class="form-group">
+            <label for="ponente">Ponente(s):</label>
+            <input type="text" id="ponente" name="ponente" [(ngModel)]="actividadSeleccionada.ponente" required>
+          </div>
+      
+          <!-- Organizador (puede haber varios) -->
+          <div class="form-group">
+            <label for="organizador">Organizador(es):</label>
+            <input type="text" id="organizador" name="organizador" [(ngModel)]="actividadSeleccionada.organizador" required>
+          </div>
+      
+          <!-- Lugar -->
+          <div class="form-group">
+            <label for="lugar">Lugar:</label>
+            <input type="text" id="lugar" name="lugar" [(ngModel)]="actividadSeleccionada.lugar" required>
+          </div>
+      
+          <!-- Límite de asistentes -->
+          <div class="form-group">
+            <label for="limiteAsistentes">Límite de asistentes:</label>
+            <input type="number" id="limiteAsistentes" name="limiteAsistentes" [(ngModel)]="actividadSeleccionada.limiteAsistentes" required>
+          </div>
+      
+          <!-- Enlace de información -->
+          <div class="form-group">
+            <label for="enlaceInformacion">Enlace de información:</label>
+            <input type="url" id="enlaceInformacion" name="enlaceInformacion" [(ngModel)]="actividadSeleccionada.enlaceInformacion" required>
+          </div>
+      
+          <!-- Enlace de inscripción -->
+          <div class="form-group">
+            <label for="enlaceInscripcion">Enlace de inscripción:</label>
+            <input type="url" id="enlaceInscripcion" name="enlaceInscripcion" [(ngModel)]="actividadSeleccionada.enlaceInscripcion" required>
+          </div>
+      
+          <!-- Descripción -->
+          <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" [(ngModel)]="actividadSeleccionada.descripcion" required></textarea>
+          </div>
+      
+          <!-- Categoría (puede haber varias) -->
+          <div class="form-group">
+            <label for="categoria">Categoría(s):</label>
+            <input type="text" id="categoria" name="categoria" [(ngModel)]="actividadSeleccionada.categoria" required>
+          </div>
+      
+          <!-- Botón para enviar el formulario -->
+          <button type="submit" class="small-button">Modificar</button>
+          <button type="button" class="small-button" (click)="cerrarFormulario()">Cancelar</button>
         </div>
-    
-        <!-- Tipo -->
-        <div class="form-group">
-          <label for="tipo">Tipo:</label>
-          <input type="text" id="tipo" name="tipo" [(ngModel)]="tipo" required>
-        </div>
-    
-        <!-- Fecha de inicio -->
-        <div class="form-group">
-          <label for="fechaInicio">Fecha de inicio:</label>
-          <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio" required>
-          <input type="time" id="horaInicio" name="horaInicio" [(ngModel)]="horaInicio" required>
-        </div>
-    
-        <!-- Fecha de finalización -->
-        <div class="form-group">
-          <label for="fechaFinal">Fecha de finalización:</label>
-          <input type="date" id="fechaFinal" name="fechaFinal" [(ngModel)]="fechaFinal" required>
-          <input type="time" id="horaFinal" name="horaFinal" [(ngModel)]="horaFinal" required>
-        </div>
-    
-        <!-- Ponente (puede haber varios) -->
-        <div class="form-group">
-          <label for="ponente">Ponente(s):</label>
-          <input type="text" id="ponente" name="ponente" [(ngModel)]="ponente" required>
-        </div>
-    
-        <!-- Organizador (puede haber varios) -->
-        <div class="form-group">
-          <label for="organizador">Organizador(es):</label>
-          <input type="text" id="organizador" name="organizador" [(ngModel)]="organizador" required>
-        </div>
-    
-        <!-- Lugar -->
-        <div class="form-group">
-          <label for="lugar">Lugar:</label>
-          <input type="text" id="lugar" name="lugar" [(ngModel)]="lugar" required>
-        </div>
-    
-        <!-- Límite de asistentes -->
-        <div class="form-group">
-          <label for="limiteAsistentes">Límite de asistentes:</label>
-          <input type="number" id="limiteAsistentes" name="limiteAsistentes" [(ngModel)]="limiteAsistentes" required>
-        </div>
-    
-        <!-- Enlace de información -->
-        <div class="form-group">
-          <label for="enlaceInformacion">Enlace de información:</label>
-          <input type="url" id="enlaceInformacion" name="enlaceInformacion" [(ngModel)]="enlaceInformacion" required>
-        </div>
-    
-        <!-- Enlace de inscripción -->
-        <div class="form-group">
-          <label for="enlaceInscripcion">Enlace de inscripción:</label>
-          <input type="url" id="enlaceInscripcion" name="enlaceInscripcion" [(ngModel)]="enlaceInscripcion" required>
-        </div>
-    
-        <!-- Descripción -->
-        <div class="form-group">
-          <label for="descripcion">Descripción:</label>
-          <textarea id="descripcion" name="descripcion" [(ngModel)]="descripcion" required></textarea>
-        </div>
-    
-        <!-- Categoría (puede haber varias) -->
-        <div class="form-group">
-          <label for="categoria">Categoría(s):</label>
-          <input type="text" id="categoria" name="categoria" [(ngModel)]="categoria" required>
-        </div>
-    
-        <!-- Botón para enviar el formulario -->
-        <button type="submit" class="small-button">Modificar</button>
       </form>
       
 </div>
@@ -221,7 +224,7 @@
     </thead>
     <tbody>
       <!-- <tr *ngFor="let actividad of actividades.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize)">-->
-        <tr *ngFor="let actividad of actividades | filtroActividades:filtroFechaInicio:filtroFechaFinal:filtroLugar:filtroPonente:filtroOrganizador:filtroCategoria | slice:(paginator.pageIndex * paginator.pageSize):((paginator.pageIndex + 1) * paginator.pageSize)">
+        <tr *ngFor="let actividad of actividades | filtroActividades:filtroFechaInicio:filtroFechaFinal:filtroLugar:filtroPonente:filtroOrganizador:filtroCategoria | slice:(paginator.pageIndex * paginator.pageSize):((paginator.pageIndex + 1) * paginator.pageSize)" (click)="seleccionarActividad(actividad)">
         <td>{{ actividad.titulo }}</td>
         <td>{{ actividad.tipo }}</td>
         <td>{{ actividad.fechaInicio.$date }}</td>

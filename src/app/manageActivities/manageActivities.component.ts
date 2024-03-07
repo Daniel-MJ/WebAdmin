@@ -29,6 +29,7 @@ export class manageActivitiesComponent implements OnInit {
   mensajeRespuesta: string = '';
   deleteActivity: string = "";
   actividades: Insputssearch[] = [];
+  actividadSeleccionada: Insputssearch | null = null;
   totalActividades: number = 0;
   filtroFechaInicio: string = "";
   filtroFechaFinal: string = "";
@@ -173,6 +174,14 @@ export class manageActivitiesComponent implements OnInit {
       this.filtroCategoria = [];
       // Aplicamos de nuevo el filtro para mostrar todas las actividades
       this.buscarTodasActividades();
+    }
+
+    seleccionarActividad(actividad: Insputssearch) {
+      this.actividadSeleccionada = actividad;
+    }
+    
+    cerrarFormulario() {
+      this.actividadSeleccionada = null;
     }
     
 }
