@@ -166,23 +166,9 @@
           <!-- Botón para enviar el formulario -->
           <button type="submit" class="small-button">Modificar</button>
           <button type="button" class="small-button" (click)="cerrarFormulario()">Cancelar</button>
+          <button type="button" class="small-button" (click)="confirmDelete()">Eliminar</button>
         </div>
       </form>
-      
-</div>
-<div>
-      <button (click)="toggleInputs2()">Eliminar Actividades</button>
-        <!-- Formulario para crear una actividad -->
-        <form *ngIf="showInputs2" (ngSubmit)="DeleteActivities()">
-          <!-- Título -->
-          <div class="form-group">
-            <label for="deleteActivity">Titulo Actividad:</label>
-            <input type="text" id="deleteActivity" name="deleteActivity" [(ngModel)]="deleteActivity" required>
-          </div>
-          <!-- Botón para enviar el formulario -->
-          <button type="submit" class="small-button">Borrar</button>
-        </form>
-        
 </div>
 
 <!-- Agrega un formulario para ingresar los filtros -->
@@ -198,11 +184,18 @@
  <div class="input-group">
   <input type="text" [(ngModel)]="filtroOrganizador" name="filtroOrganizador" placeholder="Organizador">
   <input type="text" [(ngModel)]="filtroCategoria" name="filtroCategoria" placeholder="Categoria">
-</div>
+ </div>
   <!-- Agrega más campos de filtro según sea necesario -->
-  <div class="button-container">
+ <div class="button-container">
     <button type="button" class="small-button" (click)="limpiarFiltros()">Limpiar Filtros</button>
-  </div>
+    <div>
+      <button type="button" class="small-button" (click)="exportActivities()">Exportar</button>
+      <select name="selectedTemplate" [(ngModel)]="selectedTemplate">
+        <option value="twitter">Twitter</option>
+        <option value="email">Correo</option>
+      </select>
+    </div>
+ </div>
 </form>
 
   <!-- Tabla para mostrar las actividades -->
@@ -229,13 +222,13 @@
         <td>{{ actividad.tipo }}</td>
         <td>{{ actividad.fechaInicio.$date }}</td>
         <td>{{ actividad.fechaFinal.$date }}</td>
-        <td>{{ actividad.ponente.join(', ') }}</td>
-        <td>{{ actividad.organizador.join(', ') }}</td>
+        <td>{{ isArray(actividad) ? actividad.ponente.join(', ') : actividad.ponente }}</td>
+        <td>{{ isArray(actividad) ? actividad.organizador.join(', ') : actividad.organizador }}</td>
         <td>{{ actividad.lugar }}</td>
         <td>{{ actividad.limiteAsistentes }}</td>
         <td>{{ actividad.enlaceInformacion }}</td>
         <td>{{ actividad.enlaceInscripcion }}</td>
-        <td>{{ actividad.categoria.join(', ') }}</td>
+        <td>{{ isArray(actividad) ? actividad.categoria.join(', ') : actividad.categoria }}</td>
       </tr>
     </tbody>
 </table>

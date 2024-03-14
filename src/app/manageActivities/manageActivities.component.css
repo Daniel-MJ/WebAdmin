@@ -105,6 +105,10 @@ body, input[type="text"]{
   color: white;
 }
 
+.table-container tbody tr:hover {
+    background-color: #d1a87c; /* Cambia el color de fondo al pasar el mouse */
+}
+
 .form-container {
     background-color: #f2f2f2; /* Fondo gris */
     padding: 20px;
@@ -124,6 +128,11 @@ body, input[type="text"]{
     width: 48%; /* Ancho de cada input */
   }
   
-  .button-container {
-    text-align: right; /* Alinear botón a la derecha */
-  }
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Distribuir el espacio entre los elementos */
+}
+
+.button-container button {
+  margin-left: auto; /* Mueve el botón hacia la derecha */
+}

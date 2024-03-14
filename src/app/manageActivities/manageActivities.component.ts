@@ -2,6 +2,8 @@ import { Component, ViewChild, ChangeDetectorRef, OnInit, Pipe, PipeTransform } 
 import { ApiService } from '../apirestlet.service';
 import { Insputssearch } from '../insputssearch';
 import { MatPaginator, PageEvent, MatPaginatorIntl } from '@angular/material/paginator';
+import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-manageActivities',
@@ -37,11 +39,12 @@ export class manageActivitiesComponent implements OnInit {
   filtroPonente: string[] = [];
   filtroOrganizador: string[] = [];
   filtroCategoria: string[] = [];
+  selectedTemplate: string = "";
   showInputs: boolean = false;
   showInputs1: boolean = false;
   showInputs2: boolean = false;
 
-  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef) {
+  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private http: HttpClient) {
     //this.paginator = new MatPaginator(new MatPaginatorIntl(), this.cdr.detectChanges());
   }
 
@@ -118,7 +121,7 @@ export class manageActivitiesComponent implements OnInit {
   }
 
   DeleteActivities() {
-    const deleteActivity = this.deleteActivity; // Reemplaza esto con el usuario recogido
+    const deleteActivity =this.deleteActivity; // Reemplaza esto con el usuario recogido
 
     this.apiService.deleteActivities(deleteActivity)
       .subscribe((respuesta: string) => {
@@ -178,10 +181,72 @@ export class manageActivitiesComponent implements OnInit {
 
     seleccionarActividad(actividad: Insputssearch) {
       this.actividadSeleccionada = actividad;
+      this.deleteActivity = actividad.titulo;
+      this.showInputs1 = true;
     }
     
     cerrarFormulario() {
       this.actividadSeleccionada = null;
+    }
+
+    isArray(actividad: any): boolean {
+      return Array.isArray(actividad.ponente);
+    }
+
+    confirmDelete() {
+      if (confirm("¿Estás seguro de que quieres eliminar esta actividad?")) {
+        this.DeleteActivities();
+      }
+    }
+
+    exportActivities() {
+      // Obtener las actividades actuales de la tabla
+      const activitiesToExport = this.actividades.slice(this.paginator.pageIndex * this.paginator.pageSize, (this.paginator.pageIndex + 1) * this.paginator.pageSize);
+    
+      // Verificar la plantilla seleccionada
+      if (this.selectedTemplate === 'twitter') {
+        // Exportar a la plantilla de Twitter
+        this.exportToTwitter(activitiesToExport);
+      } else if (this.selectedTemplate === 'email') {
+        // Exportar a la plantilla de Correo
+        this.exportToEmail(activitiesToExport);
+      }
+    }
+    
+    exportToTwitter(activities: any[]) {
+      this.downloadTemplate('twitter', activities);
+    }
+  
+    exportToEmail(activities: any[]) {
+      this.downloadTemplate('email', activities);
+    }
+  
+    fillTemplate(template: string, activities: any[]): string {
+      let filledTemplate = template;
+    
+      // Reemplazar cada marcador de posición con los valores de las actividades
+      activities.forEach(activity => {
+        filledTemplate = filledTemplate.replace('{{ actividad.titulo }}', activity.titulo);
+        filledTemplate = filledTemplate.replace('{{ actividad.fechaInicio }}', activity.fechaInicio);
+        filledTemplate = filledTemplate.replace('{{ actividad.fechaFinal }}', activity.fechaFinal);
+        filledTemplate = filledTemplate.replace('{{ actividad.horaInicio }}', activity.horaInicio);
+        filledTemplate = filledTemplate.replace('{{ actividad.horaFinal }}', activity.horaFinal);
+        filledTemplate = filledTemplate.replace('{{ actividad.lugar }}', activity.lugar);
+        filledTemplate = filledTemplate.replace('{{ actividad.descripcion }}', activity.descripcion);
+        filledTemplate = filledTemplate.replace('{{ actividad.enlaceInformacion }}', activity.enlaceInformacion);
+      });
+    
+      return filledTemplate;
+    }
+    
+  
+    downloadTemplate(templateName: string, activities: any[]) {
+      const fileName = `${templateName}-template.md`;
+      this.http.get(`assets/${templateName}-template.md`, { responseType: 'text' }).subscribe(template => {
+        const filledTemplate = this.fillTemplate(template, activities);
+        const blob = new Blob([filledTemplate], { type: 'text/markdown;charset=utf-8' });
+        saveAs(blob, fileName);
+      });
     }
     
 }
