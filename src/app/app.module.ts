@@ -12,6 +12,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     HttpClientModule,
     MatPaginatorModule,
     
+    
 
   ],
   declarations: [
@@ -30,6 +32,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ActividadComponent,
     manageActivitiesComponent,
     FiltroActividadesPipe,
+    LoginComponent,
+    
   ],
   providers: [
     // no need to place any providers due to the `providedIn` flag...

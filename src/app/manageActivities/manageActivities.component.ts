@@ -222,18 +222,36 @@ export class manageActivitiesComponent implements OnInit {
     }
   
     fillTemplate(template: string, activities: any[]): string {
-      let filledTemplate = template;
+      let filledTemplate = '';
     
-      // Reemplazar cada marcador de posición con los valores de las actividades
+      // Iterar sobre cada actividad y reemplazar los marcadores de posición en la plantilla
       activities.forEach(activity => {
-        filledTemplate = filledTemplate.replace('{{ actividad.titulo }}', activity.titulo);
-        filledTemplate = filledTemplate.replace('{{ actividad.fechaInicio }}', activity.fechaInicio);
-        filledTemplate = filledTemplate.replace('{{ actividad.fechaFinal }}', activity.fechaFinal);
-        filledTemplate = filledTemplate.replace('{{ actividad.horaInicio }}', activity.horaInicio);
-        filledTemplate = filledTemplate.replace('{{ actividad.horaFinal }}', activity.horaFinal);
-        filledTemplate = filledTemplate.replace('{{ actividad.lugar }}', activity.lugar);
-        filledTemplate = filledTemplate.replace('{{ actividad.descripcion }}', activity.descripcion);
-        filledTemplate = filledTemplate.replace('{{ actividad.enlaceInformacion }}', activity.enlaceInformacion);
+        let activityTemplate = template; // Plantilla de actividad específica
+        
+        // Formatear fecha de inicio
+        const fechaInicio = new Date(activity.fechaInicio.$date).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+        activityTemplate = activityTemplate.replace('{{ actividad.fechaInicio }}', fechaInicio);
+        
+        // Formatear hora de inicio
+        const horaInicio = new Date(activity.fechaInicio.$date).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        activityTemplate = activityTemplate.replace('{{ actividad.horaInicio }}', horaInicio);
+        
+        // Formatear fecha final
+        const fechaFinal = new Date(activity.fechaFinal.$date).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+        activityTemplate = activityTemplate.replace('{{ actividad.fechaFinal }}', fechaFinal);
+        
+        // Formatear hora final
+        const horaFinal = new Date(activity.fechaFinal.$date).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        activityTemplate = activityTemplate.replace('{{ actividad.horaFinal }}', horaFinal);
+    
+        // Reemplazar los demás marcadores de posición
+        activityTemplate = activityTemplate.replace('{{ actividad.titulo }}', activity.titulo);
+        activityTemplate = activityTemplate.replace('{{ actividad.lugar }}', activity.lugar);
+        activityTemplate = activityTemplate.replace('{{ actividad.descripcion }}', activity.descripcion);
+        activityTemplate = activityTemplate.replace('{{ actividad.enlaceInformacion }}', activity.enlaceInformacion);
+    
+        // Agregar la plantilla de actividad a la plantilla final
+        filledTemplate += activityTemplate + '\n';
       });
     
       return filledTemplate;
