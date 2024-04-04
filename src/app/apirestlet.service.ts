@@ -15,10 +15,11 @@ export class ApiService {
 
   getAllActividades(): Observable<Insputssearch[]> {
     const url = `${this.baseSearchUrl}/searchActivities?METODO=All`;
-    const headers  = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
-    });
+    const token = localStorage.getItem('auth_token'); //Guardas el token en el almacenamiento local después de iniciar sesión
+	  const headers = new HttpHeaders({
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${token}`, // Incluir el token JWT en el encabezado de autorización con el prefijo "Bearer"
+	  });
 
     return this.httpClient.get<Insputssearch[]>(url,{ headers, withCredentials: true });
   }
@@ -58,10 +59,15 @@ export class ApiService {
     const requestBodyString = JSON.stringify(requestBody);
 
     const url = `${this.baseSearchUrl}/manageActivities`;
-    const headers  = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
-    });
+    // const headers  = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
+    // });
+    const token = localStorage.getItem('auth_token'); // Suponiendo que guardas el token en el almacenamiento local después de iniciar sesión
+	  const headers = new HttpHeaders({
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${token}`, // Incluir el token JWT en el encabezado de autorización con el prefijo "Bearer"
+	  });
     return this.httpClient.post(url, requestBodyString, { headers, withCredentials: true, responseType: 'arraybuffer' })
     .pipe(
       map(response => new TextDecoder('utf-8').decode(response))
@@ -93,10 +99,15 @@ export class ApiService {
     const requestBodyString = JSON.stringify(requestBody);
 
     const url = `${this.baseSearchUrl}/manageActivities`;
-    const headers  = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
-    });
+    // const headers  = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
+    // });
+    const token = localStorage.getItem('auth_token'); // Suponiendo que guardas el token en el almacenamiento local después de iniciar sesión
+	  const headers = new HttpHeaders({
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${token}`, // Incluir el token JWT en el encabezado de autorización con el prefijo "Bearer"
+	  });
     return this.httpClient.put(url, requestBodyString, { headers, withCredentials: true, responseType: 'arraybuffer' })
     .pipe(
       map(response => new TextDecoder('utf-8').decode(response))
@@ -106,10 +117,15 @@ export class ApiService {
   deleteActivities(activity: String): Observable<string> {
 
     const url = `${this.baseSearchUrl}/manageActivities?titulo=${activity}`;
-    const headers  = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
-    });
+    // const headers  = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   Authorization: 'Basic ' + btoa('nuevoUsuario:nuevaContrasena'),
+    // });
+    const token = localStorage.getItem('auth_token'); // Suponiendo que guardas el token en el almacenamiento local después de iniciar sesión
+	  const headers = new HttpHeaders({
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${token}`, // Incluir el token JWT en el encabezado de autorización con el prefijo "Bearer"
+	  });
     return this.httpClient.delete(url, { headers, withCredentials: true, responseType: 'arraybuffer' })
     .pipe(
       map(response => new TextDecoder('utf-8').decode(response))
