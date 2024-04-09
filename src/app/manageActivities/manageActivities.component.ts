@@ -4,6 +4,7 @@ import { Insputssearch } from '../insputssearch';
 import { MatPaginator, PageEvent, MatPaginatorIntl } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manageActivities',
@@ -44,7 +45,7 @@ export class manageActivitiesComponent implements OnInit {
   showInputs1: boolean = false;
   showInputs2: boolean = false;
 
-  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private http: HttpClient) {
+  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private http: HttpClient,private router: Router) {
     //this.paginator = new MatPaginator(new MatPaginatorIntl(), this.cdr.detectChanges());
   }
 
@@ -264,6 +265,20 @@ export class manageActivitiesComponent implements OnInit {
         const filledTemplate = this.fillTemplate(template, activities);
         const blob = new Blob([filledTemplate], { type: 'text/markdown;charset=utf-8' });
         saveAs(blob, fileName);
+      });
+    }
+
+    sendActivities() {
+      const nameFile = this.selectedTemplate;
+      const activitiesToExport = this.actividades.slice(this.paginator.pageIndex * this.paginator.pageSize, (this.paginator.pageIndex + 1) * this.paginator.pageSize);
+      const filledTemplate = this.fillTemplate(nameFile, activitiesToExport);
+      const blob = new Blob([filledTemplate], { type: 'text/markdown;charset=utf-8' });
+        // Redirigir al componente de vista previa y pasar el blob y el fileName como parámetros de consulta
+      this.router.navigate(['/preview'], {
+        queryParams: {
+          blob: blob,
+          fileName: nameFile
+        }
       });
     }
     

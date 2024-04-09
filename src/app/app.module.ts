@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginComponent } from './login/login.component';
+import { TemplatePreviewComponent } from './template-preview/template-preview.component';
 
 
 @NgModule({
@@ -33,6 +34,8 @@ import { LoginComponent } from './login/login.component';
     manageActivitiesComponent,
     FiltroActividadesPipe,
     LoginComponent,
+    TemplatePreviewComponent
+
     
   ],
   providers: [
