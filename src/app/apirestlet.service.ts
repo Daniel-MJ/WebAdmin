@@ -3,7 +3,7 @@ import { Insputssearch } from './insputssearch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as jsSHA from 'jssha';
+import jsSHA from 'jssha';
 
 @Injectable({
   providedIn: 'root'
@@ -173,86 +173,60 @@ export class ApiService {
     return this.httpClient.post<any>('URL_DEL_ENDPOINT_DEL_SERVICIO_DE_CORREO_ELECTRONICO', requestBody);
   }
 
-  sendToTwitter(template: string): Observable<any> {
-    // Realizar la solicitud HTTP POST a la API de Twitter para realizar un tweet
-    const apiUrl = 'http://localhost:4200/ApiXUGR/1.0/statuses/update.json';
-    const apiKey = '8Rql16WGMlg6eweM11VTWckjJ';
-    const apiSecretKey = 'UGqpXRCzsDrByYo9jm3ZMyzZLTb2EwqUehY0dgr56A8g6nywkx';
-    const accessToken = '1055465892438573056-gqKDtxPczkhzZMeor62T6eIT2IeHdB';
-    const accessTokenSecret = 'OZ47hSAgqzvpULijHbKtBxuo2XIH8hQURBjU8V3BwO2Q3';
-    const nonce = generateNonce();
-    const timestamp = generateTimestamp();
+  // sendToTwitter(template: string): Observable<void> {
+  //   // Realizar la solicitud HTTP POST a la API de Twitter a través de CORS Anywhere
+  //   const corsAnywhereUrl = 'http://mylocaldomain.com:8080/'; // URL de tu servidor CORS Anywhere
+  //   const twitterApiUrl = 'https://api.twitter.com/1.1/statuses/update.json';
+    
+  //   const apiUrl = corsAnywhereUrl + twitterApiUrl; // Concatenar las dos URLs
+  //   const apyKey = 'lRnB2NIpxM8edYrfPmmTFIFLI';
+  //   const apiSecretKey = 'enTlKYeMiFXj6k4i8dmuHj1wNzkJkhbjLt8WMLvCHyjxUml75p';
+  //   const accessToken = '1055465892438573056-1eAMdZkB3NZNttAsuaUYZgBVFJNsgq';
+  //   const accessTokenSecret = 'u89dtNOMDBON5HwyKt8FXyUQOsOXIwpK4nR9ctUqvg4hH';
+  //   const nonce = generateNonce();
+  //   const timestamp = generateTimestamp();
+
+  //   const parameters = {
+  //     include_entities: 'true',
+  //     oauth_consumer_key: apiKey,
+  //     oauth_nonce: nonce,
+  //     oauth_signature_method: 'HMAC-SHA1',
+  //     oauth_timestamp: timestamp,
+  //     oauth_token: accessToken,
+  //     oauth_version: '1.0',
+  //     status: template
+  //   };
+  //   //const signature = generateOAuthSignature('POST', apiUrl, apiKey, apiSecretKey, accessToken, accessTokenSecret, timestamp, nonce, template);
+  //   const signature = generateOAuthSignature('POST', twitterApiUrl, parameters, apiSecretKey, accessTokenSecret);
+  //   console.log("Firma",signature);
+
+
+
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //     'Authorization': `OAuth oauth_consumer_key="${apiKey}", oauth_nonce="${nonce}", oauth_signature="${signature}", oauth_signature_method="HMAC-SHA1", oauth_timestamp="${timestamp}", oauth_token="${accessToken}", oauth_version="1.0"`
+  //   });
+  //   const requestBody = {
+  //     tweet: template
+  //   };
+  
+  //   return this.httpClient.post<any>(apiUrl, requestBody, { headers: headers });
+
+  // }
+
+  sendToTwitter(tweet: string): Observable<string> {
+    const url = `${this.baseSearchUrl}/PostTwitter`;
+    const token = localStorage.getItem('auth_token'); // Obtener el token de autenticación almacenado en el localStorage
+    console.log(token);
     const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'OAuth oauth_consumer_key="' + apiKey + '", oauth_nonce="' + nonce + '", oauth_signature="GENERATE_SIGNATURE", oauth_signature_method="HMAC-SHA1", oauth_timestamp="' + timestamp + '", oauth_token="' + accessToken + '", oauth_version="1.0"'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     });
-    const requestBody = {
-      tweet: template
-    };
-  
-    return this.httpClient.post<any>('URL_DEL_ENDPOINT_DE_TWITTER', requestBody);
+    //const body = { tweet: tweet }; // Cuerpo de la solicitud JSON
+    
+    return this.httpClient.post<string>(url, { headers});
   }
+
   
 
 }
-
-function generateNonce() {
-  // Generar un array de bytes aleatorios
-  const randomBytes = new Uint8Array(32);
-  crypto.getRandomValues(randomBytes);
-  const randomNumbers = Array.from(randomBytes);
-
-  // Convertir los bytes aleatorios a una cadena base64
-  const base64String = btoa(String.fromCharCode.apply(null, randomNumbers));
-
-  // Eliminar caracteres no alfanuméricos
-  const nonce = base64String.replace(/\W/g, '');
-
-  return nonce;
-}
-
-function generateTimestamp(): string {
-  return Math.floor(Date.now() / 1000).toString();
-}
-
-function generateOAuthSignature(method: string, url: string, apiKey: string, apiSecretKey: string, accessToken: string, accessTokenSecret: string, timestamp: string, nonce: string, template: string): string {
-  const baseString = `${method.toUpperCase()}&${encodeURIComponent(url)}&${encodeURIComponent(generateParameterString(apiKey, accessToken, timestamp, nonce, template))}`;
-  const signingKey = `${encodeURIComponent(apiSecretKey)}&${encodeURIComponent(accessTokenSecret)}`;
-  const signature = hmacSHA1(baseString, signingKey);
-  return encodeURIComponent(signature);
-}
-
-function generateParameterString(apiKey: string, accessToken: string, timestamp: string, nonce: string, template: string): string {
-  const parameters: { [key: string]: string } = {
-    oauth_consumer_key: apiKey,
-    oauth_nonce: nonce,
-    oauth_signature_method: 'HMAC-SHA1',
-    oauth_timestamp: timestamp,
-    oauth_token: accessToken,
-    oauth_version: '1.0',
-    tweet: template
-  };
-
-  const parameterString = Object.keys(parameters)
-    .sort()
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`)
-    .join('&');
-
-  return parameterString;
-}
-
-function hmacSHA1(baseString: string, signingKey: string): string {
-  // Crear un nuevo objeto de hash SHA-1
-  const shaObj = new jsSHA('SHA-1', 'TEXT');
-
-  // Establecer la clave de firma
-  shaObj.setHMACKey(signingKey, 'TEXT');
-
-  // Calcular el hash HMAC
-  shaObj.update(baseString);
-  const hmac = shaObj.getHMAC('B64');
-
-  return hmac;
-}
-
-

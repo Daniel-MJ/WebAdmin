@@ -1,10 +1,11 @@
-import { Component, ViewChild, ChangeDetectorRef, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef, OnInit, Pipe, PipeTransform,EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../apirestlet.service';
 import { Insputssearch } from '../insputssearch';
 import { MatPaginator, PageEvent, MatPaginatorIntl } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-manageActivities',
@@ -33,6 +34,7 @@ export class manageActivitiesComponent implements OnInit {
   deleteActivity: string = "";
   actividades: Insputssearch[] = [];
   actividadSeleccionada: Insputssearch | null = null;
+  activitiesToExport_1: any[] = [];
   totalActividades: number = 0;
   filtroFechaInicio: string = "";
   filtroFechaFinal: string = "";
@@ -46,7 +48,13 @@ export class manageActivitiesComponent implements OnInit {
   showInputs2: boolean = false;
 
   constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private http: HttpClient,private router: Router) {
-    //this.paginator = new MatPaginator(new MatPaginatorIntl(), this.cdr.detectChanges());
+    
+  }
+
+  // Constructor adicional sin parámetros
+  constructor1() {
+    // Llama al constructor principal sin pasar parámetros
+    this.constructor();
   }
 
   ngOnInit(): void {
@@ -149,7 +157,6 @@ export class manageActivitiesComponent implements OnInit {
           console.error('Error al obtener actividades:', error);
         }
       );
-
   }
 
 
@@ -159,12 +166,6 @@ export class manageActivitiesComponent implements OnInit {
     onPageChange(event: PageEvent) {
       this.paginator.pageIndex = event.pageIndex;
       this.paginator.pageSize = event.pageSize;
-      this.buscarTodasActividades();
-    }
-
-    aplicarFiltro() {
-      // Aquí simplemente actualizamos los valores de filtroFechaInicio y filtroFechaFinal
-      // Cuando estos valores cambian, Angular se encargará automáticamente de aplicar el filtro gracias al binding de datos bidireccional
       this.buscarTodasActividades();
     }
   
@@ -200,17 +201,24 @@ export class manageActivitiesComponent implements OnInit {
       }
     }
 
+
+    applyFilters() {
+      // Aplicar los filtros y almacenar las actividades filtradas en activitiesToExport
+      this.activitiesToExport_1 = new FiltroActividadesPipe().transform(this.actividades,this.filtroFechaInicio,this.filtroFechaFinal,this.filtroLugar,this.filtroPonente,this.filtroOrganizador,this.filtroCategoria);
+      console.log("Paso por applyFilters")
+    }
+
     exportActivities() {
-      // Obtener las actividades actuales de la tabla
-      const activitiesToExport = this.actividades.slice(this.paginator.pageIndex * this.paginator.pageSize, (this.paginator.pageIndex + 1) * this.paginator.pageSize);
-    
+      this.applyFilters()      
+      //const activitiesToExport_1 = this.actividades
+      console.log("Actividades en manage Export: ", this.activitiesToExport_1);
       // Verificar la plantilla seleccionada
       if (this.selectedTemplate === 'twitter') {
         // Exportar a la plantilla de Twitter
-        this.exportToTwitter(activitiesToExport);
+        this.exportToTwitter(this.activitiesToExport_1);
       } else if (this.selectedTemplate === 'email') {
         // Exportar a la plantilla de Correo
-        this.exportToEmail(activitiesToExport);
+        this.exportToEmail(this.activitiesToExport_1);
       }
     }
     
@@ -270,15 +278,23 @@ export class manageActivitiesComponent implements OnInit {
 
     sendActivities() {
       const nameFile = this.selectedTemplate;
-      const activitiesToExport = this.actividades.slice(this.paginator.pageIndex * this.paginator.pageSize, (this.paginator.pageIndex + 1) * this.paginator.pageSize);
-      const filledTemplate = this.fillTemplate(nameFile, activitiesToExport);
-      const blob = new Blob([filledTemplate], { type: 'text/markdown;charset=utf-8' });
-        // Redirigir al componente de vista previa y pasar el blob y el fileName como parámetros de consulta
-      this.router.navigate(['/preview'], {
-        queryParams: {
-          blob: blob,
-          fileName: nameFile
-        }
+      this.applyFilters() 
+      console.log("Actividades en manage send: ", this.activitiesToExport_1);
+      // Realizar una solicitud HTTP para obtener el contenido del archivo twitter-template.md
+      this.http.get(`assets/${nameFile}-template.md`, { responseType: 'text' }).subscribe((templateContent: string) => {
+        // Aquí puedes usar templateContent como el contenido del archivo twitter-template.md
+        const filledTemplate = this.fillTemplate(templateContent, this.activitiesToExport_1);
+        
+        
+        // Redirigir al componente de vista previa y pasar el string y el fileName como parámetros de consulta
+        this.router.navigate(['/template-preview'], {
+          queryParams: {
+            template: filledTemplate,
+            fileName: nameFile
+          }
+        });
+      }, (error) => {
+        console.error('Error al cargar el archivo twitter-template.md:', error);
       });
     }
     
@@ -288,6 +304,7 @@ export class manageActivitiesComponent implements OnInit {
   name: 'filtroActividades'
 })
 export class FiltroActividadesPipe implements PipeTransform {
+
   transform(actividades: any[], filtroFechaInicio: string, filtroFechaFinal: string, filtroLugar: string, filtroPonente: string[], filtroOrganizador: string[], filtroCategoria: string[]): any[] {
     if (!actividades) {
       return [];
@@ -303,29 +320,38 @@ export class FiltroActividadesPipe implements PipeTransform {
       actividadesFiltradas = actividadesFiltradas.filter(actividad => actividad.fechaInicio.$date >= filtroFechaInicio+"T00:00:00Z");
       console.log('filtro fecha Inicio:', filtroFechaInicio);
       console.log('Actividades recibidas:', actividadesFiltradas);
+      
     }
     if (filtroFechaFinal) {
       actividadesFiltradas = actividadesFiltradas.filter(actividad => actividad.fechaFinal.$date <= filtroFechaFinal+"T23:59:00Z");
       console.log('filtro fecha final:', filtroFechaFinal);
       console.log('Actividades recibidas:', actividadesFiltradas);
+     
     }
     if (filtroLugar) {
       actividadesFiltradas = actividadesFiltradas.filter(actividad => actividad.lugar.includes(filtroLugar));
       console.log('Actividades recibidas lugar:', actividadesFiltradas);
+     
     }
     if (filtroPonente && filtroPonente.length > 0) {
       actividadesFiltradas = actividadesFiltradas.filter(actividad => actividad.ponente.some((ponente: string) => filtroPonente.indexOf(ponente) !== -1));
       console.log('Actividades recibidas ponente:', actividadesFiltradas);
+      
     }
     if (filtroOrganizador && filtroOrganizador.length > 0) {
       actividadesFiltradas = actividadesFiltradas.filter(actividad => actividad.organizador.some((organizador: string) => filtroOrganizador.indexOf(organizador) !== -1));
       console.log('Actividades recibidas organizador:', actividadesFiltradas);
+      
     }
     if (filtroCategoria && filtroCategoria.length > 0) {
       actividadesFiltradas = actividadesFiltradas.filter(actividad => actividad.categoria.some((categoria: string) => filtroCategoria.indexOf(categoria) !== -1));
       console.log('Actividades recibidas categoria:', actividadesFiltradas);
+      
     }
     // Agrega más filtros para los otros parámetros
     return actividadesFiltradas;
+
+    
+    
   }
 }
