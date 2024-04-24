@@ -161,70 +161,27 @@ export class ApiService {
   
   }
   sendToEmail(template: string): Observable<any> {
-    // Realizar la solicitud HTTP POST al servicio de envío de correo electrónico para enviar el correo
-    const requestBody = {
-      email: {
-        to: 'destinatario@example.com',
-        subject: 'Asunto del correo',
-        body: template
-      }
-    };
-  
-    return this.httpClient.post<any>('URL_DEL_ENDPOINT_DEL_SERVICIO_DE_CORREO_ELECTRONICO', requestBody);
-  }
-
-  // sendToTwitter(template: string): Observable<void> {
-  //   // Realizar la solicitud HTTP POST a la API de Twitter a través de CORS Anywhere
-  //   const corsAnywhereUrl = 'http://mylocaldomain.com:8080/'; // URL de tu servidor CORS Anywhere
-  //   const twitterApiUrl = 'https://api.twitter.com/1.1/statuses/update.json';
+    const url = `${this.baseSearchUrl}/PostEmail`;
+    const token = localStorage.getItem('auth_token'); // Obtener el token de autenticación almacenado en el localStorage
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${token}`
+    });
+    const body = JSON.stringify({ template: template }, null, 2); // Cuerpo de la solicitud JSON
     
-  //   const apiUrl = corsAnywhereUrl + twitterApiUrl; // Concatenar las dos URLs
-  //   const apyKey = 'lRnB2NIpxM8edYrfPmmTFIFLI';
-  //   const apiSecretKey = 'enTlKYeMiFXj6k4i8dmuHj1wNzkJkhbjLt8WMLvCHyjxUml75p';
-  //   const accessToken = '1055465892438573056-1eAMdZkB3NZNttAsuaUYZgBVFJNsgq';
-  //   const accessTokenSecret = 'u89dtNOMDBON5HwyKt8FXyUQOsOXIwpK4nR9ctUqvg4hH';
-  //   const nonce = generateNonce();
-  //   const timestamp = generateTimestamp();
-
-  //   const parameters = {
-  //     include_entities: 'true',
-  //     oauth_consumer_key: apiKey,
-  //     oauth_nonce: nonce,
-  //     oauth_signature_method: 'HMAC-SHA1',
-  //     oauth_timestamp: timestamp,
-  //     oauth_token: accessToken,
-  //     oauth_version: '1.0',
-  //     status: template
-  //   };
-  //   //const signature = generateOAuthSignature('POST', apiUrl, apiKey, apiSecretKey, accessToken, accessTokenSecret, timestamp, nonce, template);
-  //   const signature = generateOAuthSignature('POST', twitterApiUrl, parameters, apiSecretKey, accessTokenSecret);
-  //   console.log("Firma",signature);
-
-
-
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/x-www-form-urlencoded',
-  //     'Authorization': `OAuth oauth_consumer_key="${apiKey}", oauth_nonce="${nonce}", oauth_signature="${signature}", oauth_signature_method="HMAC-SHA1", oauth_timestamp="${timestamp}", oauth_token="${accessToken}", oauth_version="1.0"`
-  //   });
-  //   const requestBody = {
-  //     tweet: template
-  //   };
-  
-  //   return this.httpClient.post<any>(apiUrl, requestBody, { headers: headers });
-
-  // }
+    return this.httpClient.post<string>(url,body, { headers});
+  }
 
   sendToTwitter(tweet: string): Observable<string> {
     const url = `${this.baseSearchUrl}/PostTwitter`;
     const token = localStorage.getItem('auth_token'); // Obtener el token de autenticación almacenado en el localStorage
-    console.log(token);
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${token}`
     });
-    //const body = { tweet: tweet }; // Cuerpo de la solicitud JSON
+    const body = JSON.stringify({ tweet: tweet }, null, 2); // Cuerpo de la solicitud JSON
     
-    return this.httpClient.post<string>(url, { headers});
+    return this.httpClient.post<string>(url,body, { headers});
   }
 
   

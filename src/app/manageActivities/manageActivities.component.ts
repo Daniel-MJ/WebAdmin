@@ -281,7 +281,7 @@ export class manageActivitiesComponent implements OnInit {
       this.applyFilters() 
       console.log("Actividades en manage send: ", this.activitiesToExport_1);
       // Realizar una solicitud HTTP para obtener el contenido del archivo twitter-template.md
-      this.http.get(`assets/${nameFile}-template.md`, { responseType: 'text' }).subscribe((templateContent: string) => {
+      this.http.get(`assets/${nameFile}-template.md`,{ responseType: 'text', headers: { 'Content-Type': 'text/plain; charset=utf-8' } }).subscribe((templateContent: string) => {
         // Aquí puedes usar templateContent como el contenido del archivo twitter-template.md
         const filledTemplate = this.fillTemplate(templateContent, this.activitiesToExport_1);
         
