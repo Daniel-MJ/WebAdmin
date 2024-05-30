@@ -1,0 +1,732 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-api-restlet documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">web-api-restlet documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content pipe">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Pipes</li>
+  <li class="breadcrumb-item" >FiltroActividadesPipe</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/manageActivities/manageActivities.component.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">Name</td>
+                        <td class="col-md-9">filtroActividades</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transform"></a>
+                    <span class="name">
+                        <span ><b>transform</b></span>
+                        <a href="#transform"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>transform(actividades: any[], filtroFechaInicio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filtroFechaFinal: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filtroLugar: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filtroPonente: string[], filtroOrganizador: string[], filtroCategoria: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="308"
+                                    class="link-to-prism">src/app/manageActivities/manageActivities.component.ts:308</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>actividades</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>filtroFechaInicio</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>filtroFechaFinal</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>filtroLugar</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>filtroPonente</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>filtroOrganizador</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>filtroCategoria</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>any[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild, ChangeDetectorRef, OnInit, Pipe, PipeTransform,EventEmitter, Output } from &#x27;@angular/core&#x27;;
+import { ApiService } from &#x27;../apirestlet.service&#x27;;
+import { Insputssearch } from &#x27;../insputssearch&#x27;;
+import { MatPaginator, PageEvent, MatPaginatorIntl } from &#x27;@angular/material/paginator&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { saveAs } from &#x27;file-saver&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+
+
+@Component({
+  selector: &#x27;app-manageActivities&#x27;,
+  templateUrl: &#x27;./manageActivities.component.html&#x27;,
+  styleUrl: &#x27;./manageActivities.component.css&#x27;
+})
+
+export class manageActivitiesComponent implements OnInit {
+  title &#x3D; &quot;Gestion de Actividades&quot;
+
+  titulo: String &#x3D; &quot;&quot;;
+  tipo: String &#x3D; &quot;&quot;;
+  fechaInicio: string &#x3D; &quot;&quot;;
+  fechaFinal: string &#x3D; &quot;&quot;;
+  horaInicio: string &#x3D; &quot;&quot;;
+  horaFinal: string &#x3D; &quot;&quot;;
+  ponente: string[] &#x3D; [];
+  organizador: string[] &#x3D; [];
+  lugar: String &#x3D; &quot;&quot;;
+  limiteAsistentes: String &#x3D; &quot;&quot;; 
+  enlaceInformacion: String &#x3D; &quot;&quot;;
+  enlaceInscripcion: String &#x3D; &quot;&quot;;
+  descripcion: String &#x3D; &quot;&quot;;
+  categoria: string[] &#x3D; [];
+  mensajeRespuesta: string &#x3D; &#x27;&#x27;;
+  deleteActivity: string &#x3D; &quot;&quot;;
+  actividades: Insputssearch[] &#x3D; [];
+  actividadSeleccionada: Insputssearch | null &#x3D; null;
+  activitiesToExport_1: any[] &#x3D; [];
+  totalActividades: number &#x3D; 0;
+  filtroFechaInicio: string &#x3D; &quot;&quot;;
+  filtroFechaFinal: string &#x3D; &quot;&quot;;
+  filtroLugar: string &#x3D; &quot;&quot;;
+  filtroPonente: string[] &#x3D; [];
+  filtroOrganizador: string[] &#x3D; [];
+  filtroCategoria: string[] &#x3D; [];
+  selectedTemplate: string &#x3D; &quot;&quot;;
+  showInputs: boolean &#x3D; false;
+  showInputs1: boolean &#x3D; false;
+  showInputs2: boolean &#x3D; false;
+
+  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private http: HttpClient,private router: Router) {
+    
+  }
+
+  // Constructor adicional sin parámetros
+  constructor1() {
+    // Llama al constructor principal sin pasar parámetros
+    this.constructor();
+  }
+
+  ngOnInit(): void {
+    this.buscarTodasActividades();
+  }
+
+  toggleInputs() {
+    this.showInputs &#x3D; !this.showInputs;
+  }
+
+  toggleInputs1() {
+    this.showInputs1 &#x3D; !this.showInputs1;
+  }
+
+  toggleInputs2() {
+    this.showInputs2 &#x3D; !this.showInputs2;
+  }
+
+  CreateActivities() {
+    const titulo &#x3D; this.titulo; // Reemplaza esto con el usuario recogido
+    const tipo &#x3D; this.tipo;
+    const fechaInicio &#x3D; this.fechaInicio;
+    const fechaFinal &#x3D; this.fechaFinal;
+    const horaInicio &#x3D; this.horaInicio;
+    const horaFinal &#x3D; this.horaFinal;
+    const ponente &#x3D; this.ponente;
+    const organizador &#x3D; this.organizador;
+    const lugar &#x3D; this.lugar;
+    const limiteAsistentes &#x3D; this.limiteAsistentes;
+    const enlaceInformacion &#x3D; this.enlaceInformacion;
+    const enlaceInscripcion &#x3D; this.enlaceInscripcion;
+    const descripcion &#x3D; this.descripcion;
+    const categoria &#x3D; this.categoria;
+
+    this.apiService.postActivities(titulo,tipo,fechaInicio,fechaFinal,horaInicio,horaFinal,ponente,organizador,lugar,limiteAsistentes,enlaceInformacion,enlaceInscripcion,descripcion,categoria)
+      .subscribe((respuesta: string) &#x3D;&gt; {
+        // Manejar las actividades devueltas
+        this.mensajeRespuesta &#x3D; respuesta;
+      },
+      (error: any) &#x3D;&gt; {
+        // Manejar el error si es necesario
+        console.error(&#x27;Error al crear usuario:&#x27;, error);
+      }
+    );
+  }
+
+  ModifyActivities() {
+    const titulo &#x3D; this.titulo; // Reemplaza esto con el usuario recogido
+    const tipo &#x3D; this.tipo;
+    const fechaInicio &#x3D; this.fechaInicio;
+    const fechaFinal &#x3D; this.fechaFinal;
+    const horaInicio &#x3D; this.horaInicio;
+    const horaFinal &#x3D; this.horaFinal;
+    const ponente &#x3D; this.ponente;
+    const organizador &#x3D; this.organizador;
+    const lugar &#x3D; this.lugar;
+    const limiteAsistentes &#x3D; this.limiteAsistentes;
+    const enlaceInformacion &#x3D; this.enlaceInformacion;
+    const enlaceInscripcion &#x3D; this.enlaceInscripcion;
+    const descripcion &#x3D; this.descripcion;
+    const categoria &#x3D; this.categoria;
+
+    this.apiService.putActivities(titulo,tipo,fechaInicio,fechaFinal,horaInicio,horaFinal,ponente,organizador,lugar,limiteAsistentes,enlaceInformacion,enlaceInscripcion,descripcion,categoria)
+      .subscribe((respuesta: string) &#x3D;&gt; {
+        // Manejar las actividades devueltas
+        this.mensajeRespuesta &#x3D; respuesta;
+      },
+      (error: any) &#x3D;&gt; {
+        // Manejar el error si es necesario
+        console.error(&#x27;Error al crear usuario:&#x27;, error);
+      }
+    );
+  }
+
+  DeleteActivities() {
+    const deleteActivity &#x3D;this.deleteActivity; // Reemplaza esto con el usuario recogido
+
+    this.apiService.deleteActivities(deleteActivity)
+      .subscribe((respuesta: string) &#x3D;&gt; {
+        // Manejar las actividades devueltas
+        this.mensajeRespuesta &#x3D; respuesta;
+      },
+      (error: any) &#x3D;&gt; {
+        // Manejar el error si es necesario
+        console.error(&#x27;Error al eliminar usuario:&#x27;, error);
+      }
+    );
+  }
+
+  buscarTodasActividades() {
+
+    this.apiService.getAllActividades()
+      .subscribe(
+        (actividades: Insputssearch[]) &#x3D;&gt; {
+          // Manejar las actividades devueltas
+          this.actividades &#x3D; actividades;
+        },
+        (error: any) &#x3D;&gt; {
+          // Manejar el error si es necesario
+          console.error(&#x27;Error al obtener actividades:&#x27;, error);
+        }
+      );
+  }
+
+
+    // Propiedad para el paginador
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    // Método para manejar el cambio de página
+    onPageChange(event: PageEvent) {
+      this.paginator.pageIndex &#x3D; event.pageIndex;
+      this.paginator.pageSize &#x3D; event.pageSize;
+      this.buscarTodasActividades();
+    }
+  
+    limpiarFiltros() {
+      // Para limpiar los filtros, simplemente restablecemos los valores a una cadena vacía
+      this.filtroFechaInicio &#x3D; &quot;&quot;;
+      this.filtroFechaFinal &#x3D; &quot;&quot;;
+      this.filtroLugar &#x3D; &quot;&quot;;
+      this.filtroPonente &#x3D; [];
+      this.filtroOrganizador &#x3D; [];
+      this.filtroCategoria &#x3D; [];
+      // Aplicamos de nuevo el filtro para mostrar todas las actividades
+      this.buscarTodasActividades();
+    }
+
+    seleccionarActividad(actividad: Insputssearch) {
+      this.actividadSeleccionada &#x3D; actividad;
+      this.deleteActivity &#x3D; actividad.titulo;
+      this.showInputs1 &#x3D; true;
+    }
+    
+    cerrarFormulario() {
+      this.actividadSeleccionada &#x3D; null;
+    }
+
+    isArray(actividad: any): boolean {
+      return Array.isArray(actividad.ponente);
+    }
+
+    confirmDelete() {
+      if (confirm(&quot;¿Estás seguro de que quieres eliminar esta actividad?&quot;)) {
+        this.DeleteActivities();
+      }
+    }
+
+
+    applyFilters() {
+      // Aplicar los filtros y almacenar las actividades filtradas en activitiesToExport
+      this.activitiesToExport_1 &#x3D; new FiltroActividadesPipe().transform(this.actividades,this.filtroFechaInicio,this.filtroFechaFinal,this.filtroLugar,this.filtroPonente,this.filtroOrganizador,this.filtroCategoria);
+      console.log(&quot;Paso por applyFilters&quot;)
+    }
+
+    exportActivities() {
+      this.applyFilters()      
+      //const activitiesToExport_1 &#x3D; this.actividades
+      console.log(&quot;Actividades en manage Export: &quot;, this.activitiesToExport_1);
+      // Verificar la plantilla seleccionada
+      if (this.selectedTemplate &#x3D;&#x3D;&#x3D; &#x27;twitter&#x27;) {
+        // Exportar a la plantilla de Twitter
+        this.exportToTwitter(this.activitiesToExport_1);
+      } else if (this.selectedTemplate &#x3D;&#x3D;&#x3D; &#x27;email&#x27;) {
+        // Exportar a la plantilla de Correo
+        this.exportToEmail(this.activitiesToExport_1);
+      }
+    }
+    
+    exportToTwitter(activities: any[]) {
+      this.downloadTemplate(&#x27;twitter&#x27;, activities);
+    }
+  
+    exportToEmail(activities: any[]) {
+      this.downloadTemplate(&#x27;email&#x27;, activities);
+    }
+  
+    fillTemplate(template: string, activities: any[]): string {
+      let filledTemplate &#x3D; &#x27;&#x27;;
+    
+      // Iterar sobre cada actividad y reemplazar los marcadores de posición en la plantilla
+      activities.forEach(activity &#x3D;&gt; {
+        let activityTemplate &#x3D; template; // Plantilla de actividad específica
+        
+        // Formatear fecha de inicio
+        const fechaInicio &#x3D; new Date(activity.fechaInicio.$date).toLocaleDateString(&#x27;es-ES&#x27;, { year: &#x27;numeric&#x27;, month: &#x27;2-digit&#x27;, day: &#x27;2-digit&#x27; });
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.fechaInicio }}&#x27;, fechaInicio);
+        
+        // Formatear hora de inicio
+        const horaInicio &#x3D; new Date(activity.fechaInicio.$date).toLocaleTimeString(&#x27;es-ES&#x27;, { hour: &#x27;2-digit&#x27;, minute: &#x27;2-digit&#x27; });
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.horaInicio }}&#x27;, horaInicio);
+        
+        // Formatear fecha final
+        const fechaFinal &#x3D; new Date(activity.fechaFinal.$date).toLocaleDateString(&#x27;es-ES&#x27;, { year: &#x27;numeric&#x27;, month: &#x27;2-digit&#x27;, day: &#x27;2-digit&#x27; });
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.fechaFinal }}&#x27;, fechaFinal);
+        
+        // Formatear hora final
+        const horaFinal &#x3D; new Date(activity.fechaFinal.$date).toLocaleTimeString(&#x27;es-ES&#x27;, { hour: &#x27;2-digit&#x27;, minute: &#x27;2-digit&#x27; });
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.horaFinal }}&#x27;, horaFinal);
+    
+        // Reemplazar los demás marcadores de posición
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.titulo }}&#x27;, activity.titulo);
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.lugar }}&#x27;, activity.lugar);
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.descripcion }}&#x27;, activity.descripcion);
+        activityTemplate &#x3D; activityTemplate.replace(&#x27;{{ actividad.enlaceInformacion }}&#x27;, activity.enlaceInformacion);
+    
+        // Agregar la plantilla de actividad a la plantilla final
+        filledTemplate +&#x3D; activityTemplate + &#x27;\n&#x27;;
+      });
+    
+      return filledTemplate;
+    }
+    
+  
+    downloadTemplate(templateName: string, activities: any[]) {
+      const fileName &#x3D; &#x60;${templateName}-template.md&#x60;;
+      this.http.get(&#x60;assets/${templateName}-template.md&#x60;, { responseType: &#x27;text&#x27; }).subscribe(template &#x3D;&gt; {
+        const filledTemplate &#x3D; this.fillTemplate(template, activities);
+        const blob &#x3D; new Blob([filledTemplate], { type: &#x27;text/markdown;charset&#x3D;utf-8&#x27; });
+        saveAs(blob, fileName);
+      });
+    }
+
+    sendActivities() {
+      const nameFile &#x3D; this.selectedTemplate;
+      this.applyFilters() 
+      console.log(&quot;Actividades en manage send: &quot;, this.activitiesToExport_1);
+      // Realizar una solicitud HTTP para obtener el contenido del archivo twitter-template.md
+      this.http.get(&#x60;assets/${nameFile}-template.md&#x60;,{ responseType: &#x27;text&#x27;, headers: { &#x27;Content-Type&#x27;: &#x27;text/plain; charset&#x3D;utf-8&#x27; } }).subscribe((templateContent: string) &#x3D;&gt; {
+        // Aquí puedes usar templateContent como el contenido del archivo twitter-template.md
+        const filledTemplate &#x3D; this.fillTemplate(templateContent, this.activitiesToExport_1);
+        
+        
+        // Redirigir al componente de vista previa y pasar el string y el fileName como parámetros de consulta
+        this.router.navigate([&#x27;/template-preview&#x27;], {
+          queryParams: {
+            template: filledTemplate,
+            fileName: nameFile
+          }
+        });
+      }, (error) &#x3D;&gt; {
+        console.error(&#x27;Error al cargar el archivo twitter-template.md:&#x27;, error);
+      });
+    }
+    
+}
+
+@Pipe({
+  name: &#x27;filtroActividades&#x27;
+})
+export class FiltroActividadesPipe implements PipeTransform {
+
+  transform(actividades: any[], filtroFechaInicio: string, filtroFechaFinal: string, filtroLugar: string, filtroPonente: string[], filtroOrganizador: string[], filtroCategoria: string[]): any[] {
+    if (!actividades) {
+      return [];
+    }
+    // Si los campos de filtro están vacíos, devolvemos todas las actividades sin filtrar
+    if (!filtroFechaInicio &amp;&amp; !filtroFechaFinal &amp;&amp; !filtroLugar &amp;&amp; !filtroPonente &amp;&amp; !filtroOrganizador &amp;&amp; !filtroCategoria ) {
+      console.log(&#x27;Actividades recibidas sin filtro:&#x27;, actividades);
+      return actividades;
+    }
+    // Aplica filtros
+    let actividadesFiltradas &#x3D; actividades;
+    if (filtroFechaInicio) {
+      actividadesFiltradas &#x3D; actividadesFiltradas.filter(actividad &#x3D;&gt; actividad.fechaInicio.$date &gt;&#x3D; filtroFechaInicio+&quot;T00:00:00Z&quot;);
+      console.log(&#x27;filtro fecha Inicio:&#x27;, filtroFechaInicio);
+      console.log(&#x27;Actividades recibidas:&#x27;, actividadesFiltradas);
+      
+    }
+    if (filtroFechaFinal) {
+      actividadesFiltradas &#x3D; actividadesFiltradas.filter(actividad &#x3D;&gt; actividad.fechaFinal.$date &lt;&#x3D; filtroFechaFinal+&quot;T23:59:00Z&quot;);
+      console.log(&#x27;filtro fecha final:&#x27;, filtroFechaFinal);
+      console.log(&#x27;Actividades recibidas:&#x27;, actividadesFiltradas);
+     
+    }
+    if (filtroLugar) {
+      actividadesFiltradas &#x3D; actividadesFiltradas.filter(actividad &#x3D;&gt; actividad.lugar.includes(filtroLugar));
+      console.log(&#x27;Actividades recibidas lugar:&#x27;, actividadesFiltradas);
+     
+    }
+    if (filtroPonente &amp;&amp; filtroPonente.length &gt; 0) {
+      actividadesFiltradas &#x3D; actividadesFiltradas.filter(actividad &#x3D;&gt; actividad.ponente.some((ponente: string) &#x3D;&gt; filtroPonente.indexOf(ponente) !&#x3D;&#x3D; -1));
+      console.log(&#x27;Actividades recibidas ponente:&#x27;, actividadesFiltradas);
+      
+    }
+    if (filtroOrganizador &amp;&amp; filtroOrganizador.length &gt; 0) {
+      actividadesFiltradas &#x3D; actividadesFiltradas.filter(actividad &#x3D;&gt; actividad.organizador.some((organizador: string) &#x3D;&gt; filtroOrganizador.indexOf(organizador) !&#x3D;&#x3D; -1));
+      console.log(&#x27;Actividades recibidas organizador:&#x27;, actividadesFiltradas);
+      
+    }
+    if (filtroCategoria &amp;&amp; filtroCategoria.length &gt; 0) {
+      actividadesFiltradas &#x3D; actividadesFiltradas.filter(actividad &#x3D;&gt; actividad.categoria.some((categoria: string) &#x3D;&gt; filtroCategoria.indexOf(categoria) !&#x3D;&#x3D; -1));
+      console.log(&#x27;Actividades recibidas categoria:&#x27;, actividadesFiltradas);
+      
+    }
+    // Agrega más filtros para los otros parámetros
+    return actividadesFiltradas;
+
+    
+    
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'pipe';
+            var COMPODOC_CURRENT_PAGE_URL = 'FiltroActividadesPipe.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
