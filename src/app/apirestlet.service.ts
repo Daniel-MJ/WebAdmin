@@ -15,7 +15,7 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
   getAllActividades(): Observable<Insputssearch[]> {
-    const url = `${this.baseSearchUrl}/searchActivities?METODO=All`;
+    const url = `${this.baseSearchUrl}/manageActivities`;
     const token = localStorage.getItem('auth_token'); //Guardas el token en el almacenamiento local después de iniciar sesión
 	  const headers = new HttpHeaders({
 		'Content-Type': 'application/json',

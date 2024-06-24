@@ -26,6 +26,7 @@ export class LoginComponent {
       },
       error => {
         console.error('Error al iniciar sesión:', error);
+        this.router.navigate(['/login']);
         // Manejar el error de inicio de sesión (mostrar un mensaje de error, por ejemplo)
       }
     );
